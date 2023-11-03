@@ -17,9 +17,10 @@ public class NumarComplex {
         return new NumarComplex(this.img - c.img, this.re - c.re);
     }
 
-    public NumarComplex inmultireScalar(int x){
+    public NumarComplex inmultireScalar(int x) {
         return new NumarComplex(this.img * x, this.re * x);
     }
+
     public String toString() {
         if (this.img == 0)
             return Integer.toString(this.re);
