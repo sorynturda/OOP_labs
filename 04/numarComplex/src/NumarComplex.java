@@ -6,6 +6,11 @@ public class NumarComplex {
         this.re = re;
     }
 
+    public NumarComplex(NumarComplex c) {
+        this.img = c.img;
+        this.re = c.re;
+    }
+
     public NumarComplex adunare(NumarComplex c) {
         NumarComplex rezultat = new NumarComplex(this.img, this.re);
         rezultat.img += c.img;
@@ -19,6 +24,10 @@ public class NumarComplex {
 
     public NumarComplex inmultireScalar(int x) {
         return new NumarComplex(this.img * x, this.re * x);
+    }
+
+    public NumarComplex inmultire(NumarComplex c) {
+        return new NumarComplex((this.re * c.img + this.img * c.re), (this.re * c.re - this.img * c.img));
     }
 
     public String toString() {
