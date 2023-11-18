@@ -1,5 +1,8 @@
 public class Manual extends Rechizita{
+    public Manual(String s){
+        eticheta = s;
+    }
     public String getNume(){
-        return this.eticheta;
+        return "Manual " + this.eticheta;
     }
 }
