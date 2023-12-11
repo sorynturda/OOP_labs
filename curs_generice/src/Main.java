@@ -10,7 +10,16 @@ public class Main {
 //        System.out.println(p4);
 //        p4.afisareDuala("OOP");
 //        p3.afisareDuala(10);
-        p3.afisareCuPereche(p3);
-        p3.afisareCuPereche(p4);
+//        p3.afisareCuPereche(p3);
+        PerecheExtends<Integer> p5 = new PerecheExtends<>(1, 2);
+        m2(p5);
+    }
+
+    static void m1(PerecheExtends<Number> num) {
+        System.out.println(num);
+    }
+
+    static <T extends Number> void m2(PerecheExtends<T> num) {
+        System.out.println(num);
     }
 }
