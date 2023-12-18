@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CatalogCarti {
-    public static List<Carte> initializeazaCatalog(){
+    public static List<Carte> initializeazaCatalog() {
         List<Carte> lista = new ArrayList<>();
         lista.add(new Carte("Codul Fotografiei", new Scriitor("Vlad Eftenie", 50, 7),
                 126, 56.25, TipCarte.ARTA));

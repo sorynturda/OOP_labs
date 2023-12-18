@@ -1,6 +1,8 @@
 public class Carte {
 
-    public Carte(){}
+    public Carte() {
+    }
+
     public Carte(String titlu, Scriitor autor, int nrPagini,
                  double pret, TipCarte tip) {
         this.titlu = titlu;
