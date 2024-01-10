@@ -7,7 +7,6 @@
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.*;
 
@@ -15,42 +14,62 @@ import static javax.swing.plaf.basic.BasicGraphicsUtils.drawString;
 
 /////////////////////////////////////////////////////////// class DragBallPanel
 
-/** When the mousePressed listener is called to position is tested
- to see if it's in the area of the ball.  If it is,
- (1) _canDrag is set true meaning pay attention to the MouseDragged events.
- (2) Record where in the ball (relative to the upper left coordinates)
- the mouse was clicked, because it looks best if we drag from there.
+/**
+ * When the mousePressed listener is called to position is tested
+ * to see if it's in the area of the ball.  If it is,
+ * (1) _canDrag is set true meaning pay attention to the MouseDragged events.
+ * (2) Record where in the ball (relative to the upper left coordinates)
+ * the mouse was clicked, because it looks best if we drag from there.
  */
 public class DragBallPanel extends JPanel implements MouseListener, MouseMotionListener {
 
+    Timer misca;
     private static final int BALL_DIAMETER = 30; // Diameter of ball
     //--- instance variables
-    /** Ball coords.  Changed by mouse listeners.  Used by paintComponent. */
+    /**
+     * Ball coords.  Changed by mouse listeners.  Used by paintComponent.
+     */
     private int _ballX = 50;   // x coord - set from drag
     private int _ballY = 50;   // y coord - set from drag
 
-    /** Position in ball of mouse press to make dragging look better. */
+    /**
+     * Position in ball of mouse press to make dragging look better.
+     */
     private int _dragFromX = 0;    // pressed this far inside ball's
     private int _dragFromY = 0;    // bounding box.
 
-    /** true means mouse was pressed in ball and still in panel.*/
+    /**
+     * true means mouse was pressed in ball and still in panel.
+     */
     private boolean _canDrag = false;
 
     //============================================================= constructor
 
-    /** Constructor sets size, colors, and adds mouse listeners.*/
+    /**
+     * Constructor sets size, colors, and adds mouse listeners.
+     */
     public DragBallPanel() {
         setPreferredSize(new Dimension(400, 400));
         setBackground(Color.blue);
         setForeground(Color.yellow);
         //--- Add the mouse listeners.
+        misca = new Timer(25, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                _ballX += 1;
+                repaint();
+            }
+        });
+        misca.setRepeats(true);
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
     }//endconstructor
 
     //=================================================== method paintComponent
 
-    /** Ball is drawn at the last recorded mouse listener coordinates. */
+    /**
+     * Ball is drawn at the last recorded mouse listener coordinates.
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);   // Required for background.
         g.fillOval(_ballX, _ballY, BALL_DIAMETER, BALL_DIAMETER);
@@ -59,10 +78,11 @@ public class DragBallPanel extends JPanel implements MouseListener, MouseMotionL
 
     //===================================================== method mousePressed
 
-    /** Set _canDrag if the click is in the ball (or in the bounding
-     box, which is lazy, but close enuf for this program).
-     Remember displacement (dragFromX and Y) in the ball
-     to use as relative point to display while dragging.
+    /**
+     * Set _canDrag if the click is in the ball (or in the bounding
+     * box, which is lazy, but close enuf for this program).
+     * Remember displacement (dragFromX and Y) in the ball
+     * to use as relative point to display while dragging.
      */
     public void mousePressed(MouseEvent e) {
         int x = e.getX();   // Save the x coord of the click
@@ -72,6 +92,10 @@ public class DragBallPanel extends JPanel implements MouseListener, MouseMotionL
             _canDrag = true;
             _dragFromX = x - _ballX;  // how far from left
             _dragFromY = y - _ballY;  // how far from top
+            if (misca.isRunning())
+                misca.stop();
+            else
+                misca.start();
         } else {
             _canDrag = false;
         }
@@ -80,7 +104,9 @@ public class DragBallPanel extends JPanel implements MouseListener, MouseMotionL
 
     //============================================================ mouseDragged
 
-    /** Set x,y  to mouse position and repaint. */
+    /**
+     * Set x,y  to mouse position and repaint.
+     */
     public void mouseDragged(MouseEvent e) {
         if (_canDrag) {   // True only if button was pressed inside ball.
             //--- Ball pos from mouse and original click displacement
@@ -101,7 +127,9 @@ public class DragBallPanel extends JPanel implements MouseListener, MouseMotionL
 
     //====================================================== method mouseExited
 
-    /** Turn off dragging if mouse exits panel. */
+    /**
+     * Turn off dragging if mouse exits panel.
+     */
     public void mouseExited(MouseEvent e) {
         _canDrag = false;
     }//end mouseExited
