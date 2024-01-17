@@ -12,4 +12,27 @@ public class Film {
         durata = d;
         esteDisponibil = disp;
     }
+
+    public boolean esteDisponibil() {
+        return esteDisponibil;
+    }
+
+    public String getTitlu() {
+        return titlu;
+    }
+
+    public String getGen() {
+        return gen;
+    }
+
+    @Override
+    public String toString() {
+        return "Film{" +
+                "movieId=" + movieId +
+                ", titlu='" + titlu + '\'' +
+                ", gen='" + gen + '\'' +
+                ", durata=" + durata +
+                ", esteDisponibil=" + esteDisponibil +
+                '}';
+    }
 }

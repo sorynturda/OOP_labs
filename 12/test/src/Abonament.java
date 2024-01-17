@@ -6,4 +6,20 @@ public class Abonament {
         this.idAbonament = idAbonament;
         this.tipAbonament = tipAbonament;
     }
+
+    public void setTipAbonament(String tipAbonament) {
+        this.tipAbonament = tipAbonament;
+    }
+
+    public String getTipAbonament() {
+        return tipAbonament;
+    }
+
+    @Override
+    public String toString() {
+        return "Abonament{" +
+                "idAbonament=" + idAbonament +
+                ", tipAbonament='" + tipAbonament + '\'' +
+                '}';
+    }
 }
