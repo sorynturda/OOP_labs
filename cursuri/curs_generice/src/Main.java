@@ -10,7 +10,7 @@ public class Main {
 //        System.out.println(p4);
 //        p4.afisareDuala("OOP");
 //        p3.afisareDuala(10);
-//        p3.afisareCuPereche(p3);
+        p3.afisareCuPereche(p4, new Pereche<>("123", 5));
         PerecheExtends<Integer> p5 = new PerecheExtends<>(1, 2);
         m2(p5);
     }

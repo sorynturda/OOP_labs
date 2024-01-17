@@ -18,14 +18,14 @@ public class PerecheExtends<T extends Number> {
     }
 
     public <V> void afisareDuala(V a) {
-        System.out.printf("first: %s second second %s \n", this.toString(), a.toString());
+        System.out.printf("first: %s second %s \n", this.toString(), a.toString());
     }
 
-    public <V> void afisareCuPereche(PerecheExtends<V> another) {
+    public <V extends Number> void afisareCuPereche(PerecheExtends<V> another) {
         System.out.printf("first: %s second %s, %s\n", this.toString(), another.getFirst().toString(), another.getSecond().toString());
     }
 
-    public <V, X> void afusareCuPereche(PerecheExtends<V> a, X b) {
+    public <V extends Number, X> void afusareCuPereche(PerecheExtends<V> a, X b) {
         System.out.printf("first %s: second %s third %s\n", this.toString(), a.toString(), b.toString());
     }
 
